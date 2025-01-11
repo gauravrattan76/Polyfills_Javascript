@@ -1,0 +1,24 @@
+const arr = [1,2,3,4,5,6];
+
+Array.prototype.myFor = function(cb){
+  const newarr = [];
+    for(let i = 0; i < this.length ; i++)
+        {
+            if(cb(this[i]))
+                {
+                    newarr.push(this[i])
+                }
+        }
+        return newarr;
+
+}
+
+function cb(v){
+   if(v > 2)
+    {
+        return true;
+    }
+}
+
+const d = arr.myFor(cb);
+console.log(d);
