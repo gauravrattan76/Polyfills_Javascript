@@ -1,0 +1,27 @@
+When writing polyfill always use function declaration 
+
+ex. Array.prototype.myFor = function(cb)
+{
+this 
+// here this will point to the array on which we want to applly foreach
+}
+______________________________________________________________________
+
+Polyfill code -
+__________________________________________________________________________
+const arr = [1,2,3,4,5,6];
+
+Array.prototype.myFor = function(cb){
+     // here this pints to thr array
+    console.log(this);
+    for(let i = 0; i < this.length ; i++)
+        {
+            cb(this[i], i, this);
+        }
+}
+
+function cb(v,i,a){
+    console.log(v,i,a)
+}
+
+arr.myFor(cb);
