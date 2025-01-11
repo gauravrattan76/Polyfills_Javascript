@@ -1,0 +1,18 @@
+const arr = [1,2,3,4,5,6];
+
+Array.prototype.myMap = function(cb){
+  const newarr = [];
+    for(let i = 0; i < this.length ; i++)
+        {
+            newarr.push(cb(this[i]));
+        }
+        return newarr;
+
+}
+
+function cb(v){
+    return v * 2;
+}
+
+const d = arr.myMap(cb);
+console.log(d);
