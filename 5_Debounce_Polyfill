@@ -1,0 +1,43 @@
+Debouncing Notes -
+
+
+Debouncing is a programming technique used to limit the rate at which a function is executed. It ensures that a function is only called after a certain amount of time has passed since the last time it was invoked.
+
+
+
+
+let valToShow =0;
+
+const btn = document.querySelector('.btn')
+
+const div = document.querySelector('.countDiv')
+
+
+const logger = (endpoint)=> console.log("we are calling the api here",endpoint)
+
+
+// debounce function , needs to be invoked intilayy so that we returna closure
+
+
+const debounce = (fn, timer) =>{
+    let time;
+    return function(...args){
+        clearInterval(time)
+        time=  setTimeout(() =>{
+            fn(...args)
+         },timer)
+    }
+}
+
+
+//here by adding debounce we are calling once at load
+const debouceClick = debounce(logger, 3000)
+
+
+
+/// here val gets triggered on click only
+btn.addEventListener('click',() => debouceClick('http  get') )
+
+
+// here outer is executed and we have a closure with us which starts on click
+btn.addEventListener('click',debouceClick)
