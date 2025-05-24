@@ -1,0 +1,66 @@
+
+Currying is a functional programming technique that transforms a function with multiple arguments into a sequence of functions, each taking a single argument. In JavaScript, this approach enhances code reusability and composability by allowing functions to be invoked with fewer arguments than they expect, returning new functions that accept the remaining arguments.
+
+function mainFn(a){
+     return function(b){
+        console.log('helo world', a, b)
+        return a + b;
+     }
+}
+
+
+const res = mainFn(5)(10)
+
+console.log(res)
+
+Result is -
+
+15
+
+
+_____________
+
+
+function mainFn(a){
+     return function(b){
+       return function(c){
+        return  a + b + c;
+       }
+     }
+}
+
+
+const res = mainFn(5)(10)(15)
+
+console.log(res)
+
+
+
+Result -
+
+30
+
+
+___________________
+
+
+Infinite currying-
+
+
+function mainFn(a){
+     return function(b){
+           if(b)
+           {
+          return  mainFn(a + b)
+           }
+           else{
+            return a
+           }
+     }
+}
+
+
+const res = mainFn(5)(10)(20)()
+
+console.log(res)
+
