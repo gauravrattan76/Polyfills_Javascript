@@ -1,6 +1,8 @@
 
 Currying is a functional programming technique that transforms a function with multiple arguments into a sequence of functions, each taking a single argument. In JavaScript, this approach enhances code reusability and composability by allowing functions to be invoked with fewer arguments than they expect, returning new functions that accept the remaining arguments.
 
+
+uses concept of closures
 function mainFn(a){
      return function(b){
         console.log('helo world', a, b)
@@ -56,6 +58,25 @@ function mainFn(a){
            else{
             return a
            }
+     }
+}
+
+
+const res = mainFn(5)(10)(20)()
+
+console.log(res)
+
+
+______________
+
+
+function mainFn(a){
+     return function(b){
+         if(b)
+         {
+            return mainFn(a +b)
+         }
+         return a;
      }
 }
 
