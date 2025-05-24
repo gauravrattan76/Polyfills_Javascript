@@ -1,0 +1,41 @@
+const myFn = (...params) => console.log('this is my func getting called', ...params)
+
+
+function outerThrottle(fn, delay)
+{
+    let currTime = 0;
+    return function(...params){
+        let now = Date.now();
+        if(now - currTime < delay )
+        {
+            return
+        }
+        currTime  = now;
+        fn(...params)
+    }
+}
+
+const myThrottle = outerThrottle(myFn, 5)
+
+
+
+myThrottle('1')
+myThrottle('112')
+myThrottle('3')
+myThrottle('9')
+myThrottle('11')
+myThrottle('12')
+myThrottle('13')
+myThrottle('50')
+myThrottle('19')
+myThrottle('17')
+myThrottle('21')
+myThrottle('22')
+myThrottle('23')
+myThrottle('29')
+myThrottle('211')
+myThrottle('212')
+myThrottle('213')
+myThrottle('250')
+myThrottle('219')
+myThrottle('217')
