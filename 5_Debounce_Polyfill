@@ -4,6 +4,109 @@ Debouncing Notes -
 Debouncing is a programming technique used to limit the rate at which a function is executed. It ensures that a function is only called after a certain amount of time has passed since the last time it was invoked.
 
 
+Debounce polyfill-
+__________________________
+
+
+Logic-
+
+Maintain a counter 
+
+Clear first 
+
+Then set
+
+
+
+//This passes to outer component
+const outer = mainDebounce(testFn, 1000);
+
+
+
+// this passes to inside component
+el.addEventListener('input', (e) => outer(e, 'test99'))
+
+_______________
+
+
+Base logic-
+
+const el = document.getElementById('textBtn')
+
+
+let counter;
+
+function debounce(){
+    clearTimeout(counter)
+    counter = setTimeout(() =>{
+        console.log('called api')
+    },1000)
+}
+
+
+el.addEventListener('input', debounce)
+
+
+
+_____________________________
+
+Above logic wrapped inside a function using concept of clpsures-
+
+
+function mainDebounce(){
+let counter;
+return function debounce(e,p){
+    clearTimeout(counter)
+    counter = setTimeout(() =>{
+        console.log('called api',e.target.value,'para is', p)
+    },1000)
+}
+}
+
+
+const outer = mainDebounce();
+
+
+el.addEventListener('input', (e) => outer(e, 'test99'))
+
+
+_______________
+
+
+All cats example-
+
+
+const el = document.getElementById('textBtn')
+
+const testFn = (p) => console.log('testf is gettingcalled', p)
+
+
+function mainDebounce(fn, timer){
+let counter;
+return function debounce(e,p){
+    clearTimeout(counter)
+  
+    counter = setTimeout(() =>{
+        console.log('called api',e.target.value,'para is', p)
+        fn(p)
+    },timer)
+}
+}
+
+
+
+//This passes to outer component
+const outer = mainDebounce(testFn, 1000);
+
+
+
+// this passes to under component
+
+el.addEventListener('input', (e) => outer(e, 'test99'))
+
+
+
+
 
 
 let valToShow =0;
