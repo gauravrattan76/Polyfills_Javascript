@@ -1,0 +1,67 @@
+Flatten an object in js -
+___________________
+
+
+
+const nestedObj = {
+    company: "OpenAI",
+    address: {
+      city: "San Francisco",
+      zip: {
+        code: 94110,
+        plus4: 1234
+      }
+    },
+    contact: {
+      phone: "123-456-7890",
+      email: "info@openai.com"
+    }
+  };
+
+
+  const flatObj = {};
+
+function flat(obj)
+{
+    for(let key in obj)
+    {
+       if(typeof(obj[key]) === 'object')
+        {
+            flat(obj[key])
+        }
+      else{
+        flatObj[key] = obj[key]
+      }
+
+    }
+    return flatObj
+}
+
+const res = flat(nestedObj)
+console.log(res)
+
+
+__________
+
+
+Best code - 
+
+function flat(obj, parentKey = '')
+{
+    for(let key in obj)
+    {
+      const newKey = parentKey ? `${parentKey}.${key}` : key;
+       if(typeof(obj[key]) === 'object')
+        {
+            flat(obj[newKey], newKey)
+        }
+      else{
+        flatObj[newKey] = obj[key]
+      }
+
+    }
+    return flatObj
+}
+
+const res = flat(nestedObj)
+console.log(res)
