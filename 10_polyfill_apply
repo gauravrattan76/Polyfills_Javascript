@@ -1,0 +1,18 @@
+const person ={
+    name: 'gaurav'
+}
+
+
+function PrintName(age,sex)
+{
+    console.log(`this is the name of person ${this.name} and age is ${age} and sex is ${sex}`)
+}
+
+
+Function.prototype.myApply  = function (obj={}, args){
+    obj.fn = this;
+    obj.fn(...args)
+
+}
+
+PrintName.myApply(person,[21,'female'])
