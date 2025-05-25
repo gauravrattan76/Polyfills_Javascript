@@ -1,0 +1,21 @@
+const person ={
+    name: 'gaurav'
+}
+
+
+function PrintName(age,sex)
+{
+    console.log(`this is the name of person ${this.name} and age is ${age} and sex is ${sex}`)
+}
+
+// PrintName.call(person,21,'female')
+
+
+Function.prototype.myCall =  function(obj={}, ...args)
+{
+    // here this points to the funciton add a function to object and pass params
+    obj.fn = this;
+    obj.fn(...args)
+}
+
+PrintName.myCall(person,21,'female')
