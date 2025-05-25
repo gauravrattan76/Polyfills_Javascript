@@ -1,0 +1,21 @@
+const person ={
+    name: 'gaurav'
+}
+
+
+function PrintName(age,sex)
+{
+    console.log(`this is the name of person ${this.name} and age is ${age} and sex is ${sex}`)
+}
+
+Function.prototype.myBind  = function (obj={}){
+    obj.fn = this;
+    return function(...args)
+    {
+        obj.fn(...args)
+    }
+
+}
+
+const res = PrintName.myBind(person)
+res(23, 'male');
